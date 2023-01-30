@@ -17,6 +17,8 @@ pub fn nav_bar() -> Html {
             padding: 0;
             overflow: hidden;
             background-color: #333;
+            float: top
+            
         }
         
         li {
