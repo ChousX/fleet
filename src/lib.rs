@@ -21,9 +21,10 @@ pub fn app() -> Html {
     html! {
         // <ContextProvider<User> context={user}>
             <BrowserRouter>
-                <NavBar/>
+                    <NavBar/>
                 <Switch<Route> render={Route::switch} />
             </BrowserRouter>
+           
         // </ContextProvider<User>>
     }
 }

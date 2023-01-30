@@ -6,7 +6,7 @@ use crate::components::{cell::text_input::TextInput, tissues::auth_form::AuthFor
 #[styled_component(Login)]
 pub fn login() -> Html {
     html! {
-        <body>
+        <>
             <div class={get_style()}>
                 <div class={"center"}>
                     <img src="/img/fleet.png" alt="Fleet Logo"/>
@@ -14,7 +14,7 @@ pub fn login() -> Html {
                     <AuthForm/>
                 </div>
             </div>
-        </body>
+        </>
     }
 }
 

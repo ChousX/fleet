@@ -15,36 +15,56 @@ pub fn nav(Props { routes }: &Props) -> Html {
     if routes.len() < 1 {
         panic!("entrys are less then 1 in the nav list")
     }
-    let first = routes.first().unwrap();
-    let dropdown = if routes.len() > 1{"DropDown"} else {"Single"};
-
-    let navs = if let Some(navigator) = use_navigator() {
+    let multy = routes.len() > 1;
+    let mut routes = routes.clone();
+    let first = routes.remove(0);
+    let navigator = use_navigator();
+    //Clickable
+    let afters = if let Some(navigator) = navigator.clone() {
         routes
             .into_iter()
             .map(|route| {
                 let route = route.clone();
                 let navigator = navigator.clone();
-                html! {
-                    <Nav name={route.to_string()} onclick={Callback::from(move |_| navigator.push(&route))}/>
-                }
+                    html! {
+                        <li><Nav name={route.to_string()} onclick={Callback::from(move |_| navigator.push(&route))}/></li>
+                    }
             })
             .collect::<Html>()
     } else {
         routes
             .into_iter()
-            .map(|entry| {
+            .map(|route| {
                 html! {
-                    <Nav name={entry.to_string()}/>
+                    <li><Nav name={route.to_string()}/></li>
                 }
             })
             .collect::<Html>()
     };
 
-    html! {
-        <div class={dropdown}>
-        <ul class={first.to_string()}>
-            {navs}
-        </ul>
-        </div>
+    let out_first = if let Some(navigator) = navigator{
+        let first = first.clone();
+        html! {
+            <Nav name={first.to_string()} onclick={Callback::from(move |_| navigator.push(&first))}/>
+        }
+    } else {
+        html! {
+           <Nav name={first.to_string()}/>
+       }
+    };
+
+    if multy{
+        html!{
+            <li>
+                {out_first}
+                <ul>
+                    {afters}
+                </ul>
+            </li>
+        }
+    } else {
+        html!{
+            <li>{out_first}</li>
+        }
     }
 }
