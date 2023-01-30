@@ -11,6 +11,8 @@ impl Component for PageNotFound {
     }
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
-        html! {}
+        html! {
+            <h1>{"Looks like some thing whent wrong"}</h1>
+        }
     }
 }

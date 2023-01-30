@@ -2,13 +2,13 @@ use std::fmt::Display;
 
 use stylist::{style, yew::styled_component};
 use yew::prelude::*;
-use yew_router::{prelude::*, navigator};
+use yew_router::{navigator, prelude::*};
 
-use crate::{pages::Route, User};
+use crate::pages::Route;
 
 #[styled_component(NavBar)]
 pub fn nav_bar() -> Html {
-    let context = use_context::<User>();
+    // let context = use_context::<User>();
     let nav_bar_style = style! {
         r#"
         ul {
@@ -43,28 +43,27 @@ pub fn nav_bar() -> Html {
     }
     .expect("failed to build css");
 
-
     let navigator = use_navigator().unwrap();
     html! {
         <nav class = {nav_bar_style}>
             <ul>
                 {Route::NAV.into_iter().map(|n| html!{
-                    if *n == Route::Account{
-                        if let Some(User{username, ..}) = &context{
-                            {listify(username, n, &navigator)}   
-                        } else {
-                            {listify(n, n, &navigator)}
-                        }
-                    } else {
+                    // if *n == Route::Account{
+                    //     if let Some(User{username, ..}) = &context{
+                    //         {listify(username, n, &navigator)}
+                    //     } else {
+                    //         {listify(n, n, &navigator)}
+                    //     }
+                    // } else {
                         {listify(n, n, &navigator)}
-                    }
+                    // }
                 }).collect::<Html>()}
             </ul>
         </nav>
     }
 }
 
-pub fn listify(name: &impl Display, route: &Route, navigator: &Navigator) -> Html {
+fn listify(name: &impl Display, route: &Route, navigator: &Navigator) -> Html {
     let route = route.clone();
     let navigator = navigator.clone();
     html! {

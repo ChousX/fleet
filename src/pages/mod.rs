@@ -13,6 +13,15 @@ use yew_router::prelude::*;
 use enum_display_derive::Display;
 use std::fmt::Display;
 
+mod account;
+use account::Account;
+
+mod login;
+use login::Login;
+
+mod create;
+use create::Create;
+
 #[derive(Routable, PartialEq, Eq, Clone, Debug, Display)]
 pub enum Route {
     #[at("/")]
@@ -32,6 +41,7 @@ pub enum Route {
 
 impl Route {
     pub const NAV: &'static [Route] = &[Route::Home, Route::About, Route::Account];
+    pub const ACCOUNT: &'static [Route] = &[Route::Login, Route::Create];
 }
 
 impl Route {
@@ -46,9 +56,9 @@ impl Route {
             Route::NotFound => {
                 html! { <PageNotFound /> }
             }
-            Route::Account => todo!(),
-            Route::Login => todo!(),
-            Route::Create => todo!(),
+            Route::Account => html! { <Account /> },
+            Route::Login => html! { <Login /> },
+            Route::Create => html! { <Create /> },
         }
     }
 }
