@@ -40,8 +40,7 @@ pub enum Route {
 }
 
 impl Route {
-    pub const NAV: &'static [Route] = &[Route::Home, Route::About, Route::Account];
-    pub const ACCOUNT: &'static [Route] = &[Route::Login, Route::Create];
+    pub const NAV: &'static[&'static[Route]] = &[&[Route::Home], &[Route::About], &[Route::Account, Route::Login, Route::Create]]; 
 }
 
 impl Route {
