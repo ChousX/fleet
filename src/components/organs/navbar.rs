@@ -11,10 +11,35 @@ pub fn nav_bar() -> Html {
     // let context = use_context::<User>();
     let nav_bar_style = style! {
         r#"
-        .navbar {
-            display: flex;
-            justify-content: space-between;
+        .navbar{
+            border-top:1px solid #ddd;
+            border-bottom:1px solid #ddd;
+            margin:2em;
+            
         }
+        
+        li a{
+            display:flex;
+            text-align:center;
+            text-decoration:none;
+            color:#777;
+            padding:1rem;
+        }
+
+        li a:hover{
+            background:#777;
+            color:#fff;
+          }
+
+          @media (min-width: 800px) {
+            .menu{
+              flex-direction:row;
+              justify-content:space-between;
+            }
+        }
+
+
+
         "#
     }
     .expect("failed to build css");
@@ -28,7 +53,7 @@ pub fn nav_bar() -> Html {
     html! {
         <div class= {nav_bar_style}>
             <nav class = {"navbar"}>
-                {nav_lists}
+                <ul class="menu">{nav_lists}</ul>
             </nav>
         </div>
     }

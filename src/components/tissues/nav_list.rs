@@ -15,19 +15,17 @@ pub fn nav(Props { routes }: &Props) -> Html {
     if routes.len() < 1 {
         panic!("entrys are less then 1 in the nav list")
     }
-
     let first = routes.first().unwrap();
+    let dropdown = if routes.len() > 1{"DropDown"} else {"Single"};
 
     let navs = if let Some(navigator) = use_navigator() {
-        let first = first.clone();
         routes
             .into_iter()
             .map(|route| {
                 let route = route.clone();
                 let navigator = navigator.clone();
-                let dropdown = route != first;
                 html! {
-                    <Nav name={route.to_string()} onclick={Callback::from(move |_| navigator.push(&route))} dropdown={dropdown}/>
+                    <Nav name={route.to_string()} onclick={Callback::from(move |_| navigator.push(&route))}/>
                 }
             })
             .collect::<Html>()
@@ -43,8 +41,10 @@ pub fn nav(Props { routes }: &Props) -> Html {
     };
 
     html! {
-        <li class={first.to_string()}>
+        <div class={dropdown}>
+        <ul class={first.to_string()}>
             {navs}
-        </li>
+        </ul>
+        </div>
     }
 }

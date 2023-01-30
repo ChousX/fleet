@@ -8,25 +8,23 @@ use crate::pages::Route;
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub name: String,
-    pub onclick: Option<Callback<MouseEvent>>,
-    pub dropdown: Option<bool>,
+    pub onclick: Option<Callback<MouseEvent>>
 }
 
 #[function_component(Nav)]
-pub fn nav(Props { name, onclick,  dropdown}: &Props) -> Html {
-    let class = if dropdown.unwrap_or(true) {
-        "nav_dropdown"
+pub fn nav(Props { name, onclick}: &Props) -> Html {
+
+    let almost = if let Some(clicked) = onclick {
+        html! {
+            <a onclick={clicked} class={name}>{name}</a>
+        }
     } else {
-        "nav_first"
+        html! {
+            <a class={name}>{name}</a>
+        }
     };
-    if let Some(clicked) = onclick {
-        html! {
-            <a onclick={clicked} class={class}>{name}</a>
-        }
-    } else {
-        html! {
-            <a class="nav_cell">{name}</a>
-        }
+    html!{
+        <li>{almost}</li>
     }
 }
 
