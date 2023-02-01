@@ -1,6 +1,6 @@
-use yew::prelude::*;
-use web_sys::HtmlInputElement;
 use wasm_bindgen::JsCast;
+use web_sys::HtmlInputElement;
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -8,7 +8,7 @@ pub struct Props {
     pub place_holder: Option<String>,
     pub t_ype: Option<String>,
     pub f_or: Option<String>,
-    pub handle_onchange: Callback<String>
+    pub handle_onchange: Callback<String>,
 }
 
 #[function_component(TextInput)]
@@ -18,7 +18,7 @@ pub fn text_input(
         place_holder,
         f_or,
         t_ype,
-        handle_onchange
+        handle_onchange,
     }: &Props,
 ) -> Html {
     let handle_onchange = handle_onchange.clone();
@@ -28,7 +28,7 @@ pub fn text_input(
             .unwrap()
             .unchecked_into::<HtmlInputElement>()
             .value();
-            handle_onchange.emit(value);
+        handle_onchange.emit(value);
     });
     html! {
         <div>

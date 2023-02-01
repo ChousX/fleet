@@ -43,20 +43,24 @@ pub fn nav(Props { routes, name }: &Props) -> Html {
             .collect::<Html>()
     };
 
-    let name = if let Some(name) = name {name.to_owned()} else {first.to_string()};
-    let out_first = if let Some(navigator) = navigator{
+    let name = if let Some(name) = name {
+        name.to_owned()
+    } else {
+        first.to_string()
+    };
+    let out_first = if let Some(navigator) = navigator {
         let first = first.clone();
         html! {
             <Nav name={name} onclick={Callback::from(move |_| navigator.push(&first))}/>
         }
     } else {
         html! {
-           <Nav name={name}/>
-       }
+            <Nav name={name}/>
+        }
     };
 
-    if multy{
-        html!{
+    if multy {
+        html! {
             <li>
                 {out_first}
                 <ul>
@@ -65,7 +69,7 @@ pub fn nav(Props { routes, name }: &Props) -> Html {
             </li>
         }
     } else {
-        html!{
+        html! {
             <li>{out_first}</li>
         }
     }

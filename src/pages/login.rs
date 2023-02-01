@@ -1,16 +1,17 @@
 use stylist::{style, yew::styled_component, Style};
 use yew::prelude::*;
 
-use crate::components::{cell::text_input::TextInput, tissues::auth_form::AuthForm};
+use crate::components::{cell::text_input::TextInput, tissues::form::{Form, FormEntry}};
 
 #[styled_component(Login)]
 pub fn login() -> Html {
+    use FormEntry::*;
     html! {
         <div class={get_style()}>
             <div class={"center"}>
                 <img src="/img/fleet.png" alt="Fleet Logo"/>
                 <h1>{"Login"}</h1>
-                <AuthForm/>
+                <Form entries={vec![Text("Username".to_owned()), Password("Password".to_owned())]}/>
             </div>
         </div>
     }

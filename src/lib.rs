@@ -18,7 +18,7 @@ use yewdux::prelude::use_store;
 #[styled_component(App)]
 pub fn app() -> Html {
     let (account_info, _account_info_dispatch) = use_store::<AccountInfo>();
-    html!{
+    html! {
         <BrowserRouter>
             <ContextProvider<Rc<AccountInfo>> context={account_info}>
                 <NavBar/>

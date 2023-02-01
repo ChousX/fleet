@@ -9,8 +9,13 @@ pub struct AccountInfo {
     pub settings: (),
 }
 
-impl Default for AccountInfo{
+impl Default for AccountInfo {
     fn default() -> Self {
-        Self { user_name: Some("Garrett".to_owned()), password: None, user_id: None, settings: () }
+        Self {
+            user_name: Some("Garrett".to_owned()),
+            password: None,
+            user_id: None,
+            settings: (),
+        }
     }
 }

@@ -21,7 +21,7 @@ mod login;
 use login::Login;
 
 mod create;
-use create::Create;
+use create::CreateAccount;
 
 #[derive(Routable, PartialEq, Eq, Clone, Debug, Display)]
 pub enum Route {
@@ -62,7 +62,7 @@ impl Route {
             }
             Route::Account => html! { <Account /> },
             Route::Login => html! { <Login /> },
-            Route::Create => html! { <Create /> },
+            Route::Create => html! { <CreateAccount /> },
         }
     }
 }
