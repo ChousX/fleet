@@ -21,7 +21,8 @@ pub enum Msg {
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub entries: Vec<FormEntry>,
-    pub callback: Option<Callback<FormData>>
+    pub callback: Option<Callback<FormData>>,
+    pub button_name: Option<String>,
 }
 
 #[derive(PartialEq, Clone,)]
@@ -76,7 +77,7 @@ impl Component for Form {
     type Properties = Props;
 
     fn create(ctx: &yew::Context<Self>) -> Self {
-        let Props { entries, callback } = ctx.props();
+        let Props { entries, callback, button_name} = ctx.props();
         let dispatch = Dispatch::<FormData>::subscribe(ctx.link().callback(Msg::Store));
         let data = FormData{
             entries: entries.iter().map(|e| { 
@@ -110,11 +111,11 @@ impl Component for Form {
                 },
             }
         }).collect::<Html>();
-
+        let button_name = ctx.props().button_name.clone().unwrap_or("Done".to_owned());
         html! {
             <div>
                 {entries}
-                <button onclick={ctx.link().callback(|_| Msg::Submit)}>{"Create"}</button>
+                <button onclick={ctx.link().callback(|_| Msg::Submit)}>{button_name}</button>
             </div>
         }
     }

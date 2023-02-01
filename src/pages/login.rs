@@ -11,7 +11,7 @@ pub fn login() -> Html {
             <div class={"center"}>
                 <img src="/img/fleet.png" alt="Fleet Logo"/>
                 <h1>{"Login"}</h1>
-                <Form entries={vec![Text("Username".to_owned()), Password("Password".to_owned())]}/>
+                <Form entries={vec![Text("Username".to_owned()), Password("Password".to_owned())]} button_name={"Login"}/>
             </div>
         </div>
     }
