@@ -8,10 +8,11 @@ use crate::{components::cell::nav_element::Nav, pages::Route};
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub routes: Vec<Route>,
+    pub name: Option<String>,
 }
 
 #[function_component(NavList)]
-pub fn nav(Props { routes }: &Props) -> Html {
+pub fn nav(Props { routes, name }: &Props) -> Html {
     if routes.len() < 1 {
         panic!("entrys are less then 1 in the nav list")
     }
@@ -42,14 +43,15 @@ pub fn nav(Props { routes }: &Props) -> Html {
             .collect::<Html>()
     };
 
+    let name = if let Some(name) = name {name.to_owned()} else {first.to_string()};
     let out_first = if let Some(navigator) = navigator{
         let first = first.clone();
         html! {
-            <Nav name={first.to_string()} onclick={Callback::from(move |_| navigator.push(&first))}/>
+            <Nav name={name} onclick={Callback::from(move |_| navigator.push(&first))}/>
         }
     } else {
         html! {
-           <Nav name={first.to_string()}/>
+           <Nav name={name}/>
        }
     };
 

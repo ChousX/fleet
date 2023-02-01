@@ -1,4 +1,5 @@
 mod home;
+pub mod tasks;
 pub use home::Home;
 
 mod page_not_found;

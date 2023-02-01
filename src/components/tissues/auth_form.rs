@@ -52,10 +52,11 @@ impl Component for AuthForm {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
+
         html! {
             <div class="auth_form">
-                <TextInput lable={"Username"} place_holder={"username"}/>
-                <TextInput lable={"Passsword"} place_holder={"********"} t_ype={"password"}/>
+                // <TextInput lable={"Username"} place_holder={"username"}/>
+                // <TextInput lable={"Passsword"} place_holder={"********"} t_ype={"password"}/>
                 <button onclick={Callback::from(|_| ())}>{"Login"}</button>
             </div>
         }

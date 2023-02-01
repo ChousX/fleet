@@ -15,7 +15,7 @@ pub struct Props {
 pub fn nav(Props { name, onclick }: &Props) -> Html {
     if let Some(clicked) = onclick {
         html! {
-            <a onclick={clicked} class={name}>{name}</a>
+            <a onclick={clicked}>{name}</a>
         }
     } else {
         html! {
