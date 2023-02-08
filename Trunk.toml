@@ -1,2 +1,4 @@
 [[proxy]]
-backend = "http://localhost:80/"
+backend = "http://localhost:9000/api"
+insecure = true
+rewrite = "/api"
