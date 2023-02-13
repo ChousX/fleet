@@ -2,14 +2,14 @@ use std::rc::Rc;
 
 #[macro_use]
 use enum_display_derive;
-use stores::account_info::AccountInfo;
 use stylist::{style, yew::styled_component, Style};
 use yew::prelude::*;
 use yew_router::{BrowserRouter, Switch};
+use courier::account_data::AccountData;
+
 mod components;
 mod pages;
 
-mod stores;
 use pages::Route;
 
 use components::organs::NavBar;
@@ -17,15 +17,14 @@ use yewdux::prelude::use_store;
 
 #[styled_component(App)]
 pub fn app() -> Html {
-    let (account_info, _account_info_dispatch) = use_store::<AccountInfo>();
+    let (account_info, _account_info_dispatch) = use_store::<AccountData>();
     html! {
         <BrowserRouter>
-            <ContextProvider<Rc<AccountInfo>> context={account_info}>
+            <ContextProvider<Rc<AccountData>> context={account_info}>
                 <NavBar/>
                 <Switch<Route> render={Route::switch}/>
-            </ContextProvider<Rc<AccountInfo>>>
+            </ContextProvider<Rc<AccountData>>>
         </BrowserRouter>
-
     }
 }
 
